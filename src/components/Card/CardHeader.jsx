@@ -41,6 +41,7 @@ CardHeader.propTypes = {
   className: PropTypes.string,
   color: PropTypes.oneOf([
     "warning",
+    {"test" :"#59c89f"},
     "success",
     "danger",
     "info",

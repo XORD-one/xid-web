@@ -12,6 +12,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import axios from "axios";
+import Table from "../../components/Table/Table";
 
 const styles = {
   cardCategoryWhite: {
@@ -56,19 +57,25 @@ class TableList extends React.Component {
       if(request.data[i].status === "ACCEPTED")
       acceptedRequests.push(request.data[i].cnicNumber)
     }
+    let acceptedRequestsData = [];
+    for (let y = 0 ; y < acceptedRequests.length ;y++){
+      let requestData = await axios.get("http://192.168.20.72:3000/api/Cnic/"+"4220138891449")
+      acceptedRequestsData.push(requestData.data);
+    }
 
-    // let tempArr = [];
-    // let reqObj = request.data;
-    // for (var i = 0; i < reqObj.length; i++) {
-    //   let innerArr = [];
-    //   innerArr.push(reqObj[i].requestId);
-    //   innerArr.push(reqObj[i].cnicNumber);
-    //   innerArr.push(reqObj[i].status);
-    //   tempArr.push(innerArr);
-    // }
-    // this.setState({
-    //   arr: tempArr
-    // });
+    let tempArr = [];
+    for (var i = 0; i < acceptedRequestsData.length; i++) {
+      let innerArr = [];
+      innerArr.push(acceptedRequestsData[i].idNumber);
+      innerArr.push(acceptedRequestsData[i].fullName);
+      innerArr.push("Name : "+acceptedRequestsData[i].fullName+" Country : "+acceptedRequestsData[i].country + " Date of Birth : "+acceptedRequestsData[i].dob );
+      tempArr.push(innerArr);
+    }
+
+    console.log(tempArr)
+    this.setState({
+      requests: tempArr
+    });
   }
 
   render() {
@@ -77,42 +84,22 @@ class TableList extends React.Component {
       <div>
         <GridContainer>
           <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Approved Requests</h4>
+            <CardHeader  style={{ backgroundColor: '#59c89f' }}>
+              <h4 className={classes.cardTitleWhite}><b>Approved Requests</b></h4>
               <p className={classes.cardCategoryWhite}>
-                List of requests that were approved.
+                <b>   Approved data fetched from user</b>
               </p>
             </CardHeader>
             <CardBody>
-              <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography className={classes.heading}>
-                    42201-443432392-0
-                  </Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Typography>
-                    Name : Fahad Hussain , Father Name : Hussain Ali , Address : Al muslim society karachi , Date of Birth : 19/12/01
-                  </Typography>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-              <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography className={classes.heading}>
-                    42201-443432392-0
-                  </Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse malesuada lacus ex, sit amet blandit leo
-                    lobortis eget.
-                  </Typography>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+              <Table
+                tableHeaderColor="primary"
+                tableHead={["CNIC Number", "Name", "Fetched Data"]}
+                tableData={this.state.requests}
+              />
             </CardBody>
           </Card>
         </GridContainer>
+
       </div>
     );
   }

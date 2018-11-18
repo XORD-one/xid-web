@@ -157,7 +157,7 @@ class UserProfile extends React.Component {
       <div>
         <Button
           round
-          color="primary"
+          color="#59c89f"
           aria-label="Delete"
           floated="right"
           onClick={this.handleClickOpen}
@@ -297,24 +297,24 @@ class UserProfile extends React.Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button onClick={this.submitRequest} color="primary">
+              <Button onClick={this.submitRequest} style={{ backgroundColor: '#59c89f' }}>
                 Request
               </Button>
             </DialogActions>
           </Dialog>
         </div>
         <GridContainer>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Requests</h4>
+          <Card >
+            <CardHeader style={{ backgroundColor: '#59c89f' }} >
+              <h4 className={classes.cardTitleWhite}><b>Requests</b></h4>
               <p className={classes.cardCategoryWhite}>
-                The requests and their status.
+                <b>The requests and their status.</b>
               </p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="primary"
-                tableHead={["ID", "CNIC Number", "Status"]}
+                tableHead={["Request ID", "CNIC Number", "Status"]}
                 tableData={this.state.arr}
               />
             </CardBody>
