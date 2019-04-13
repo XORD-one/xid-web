@@ -112,7 +112,7 @@ class UserProfile extends React.Component {
 
   submitRequest = async event => {
     event.preventDefault();
-      await axios.post("http://135.196.79.113:3000/api/Request", {
+      await axios.post("http://35.196.79.113:3000/api/Request", {
       requestId : uuid.generateUUID(),
       status : "PENDING",
       cnicNumber: this.state.cnicInput,
