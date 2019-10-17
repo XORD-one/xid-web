@@ -52,14 +52,14 @@ class TableList extends React.Component {
 
   async componentDidMount() {
     let acceptedRequests = [];
-    let request = await axios.get("http://35.244.29.37:3000/api/Request");
+    let request = await axios.get("http://34.67.194.218:3000/api/Request");
     for(let i = 0 ; i < request.data.length ; i++){
       if(request.data[i].status === "ACCEPTED")
       acceptedRequests.push(request.data[i].cnicNumber)
     }
     let acceptedRequestsData = [];
     for (let y = 0 ; y < acceptedRequests.length ;y++){
-      let requestData = await axios.get("http://35.244.29.37:3000/api/Cnic/"+"4220138891449")
+      let requestData = await axios.get("http://34.67.194.218:3000/api/Cnic/"+"4220138891449")
       acceptedRequestsData.push(requestData.data);
     }
 

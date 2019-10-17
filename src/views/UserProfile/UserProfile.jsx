@@ -94,7 +94,7 @@ class UserProfile extends React.Component {
   };
 
   async componentDidMount() {
-    let request = await axios.get("http://35.244.29.37:3000/api/Request");
+    let request = await axios.get("http://34.67.194.218:3000/api/Request");
     let tempArr = [];
     let reqObj = request.data;
     for (var i = 0; i < reqObj.length; i++) {
@@ -112,14 +112,14 @@ class UserProfile extends React.Component {
 
   submitRequest = async event => {
     event.preventDefault();
-      await axios.post("http://35.244.29.37:3000/api/Request", {
+      await axios.post("http://34.67.194.218:3000/api/Request", {
       requestId : uuid.generateUUID(),
       status : "PENDING",
       cnicNumber: this.state.cnicInput,
       owner : "TELENOR_MICRO_FINANCE"
     });
     this.handleClose();
-    let request = await axios.get("http://35.244.29.37:3000/api/Request");
+    let request = await axios.get("http://34.67.194.218:3000/api/Request");
     console.log(request);
     let tempArr = [];
     let reqObj = request.data;
